@@ -4,6 +4,33 @@
 }
 
 .container {
-  margin: 0;
-  padding: 0;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Title section */
+
+#title-section {
+  margin-top: 50px;
+}
+
+.main-heading {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.sub-heading {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Graph Section */
+
+#graph-section {
+  margin-top: 50px;
+}
+
+#graph-img {
+  max-width: 100%;
+  overflow: hidden;
 }
