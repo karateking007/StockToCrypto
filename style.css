@@ -49,5 +49,6 @@
 }
 
 #myChart {
-  
+  width:800px !important;
+  height:450px !important;
 }

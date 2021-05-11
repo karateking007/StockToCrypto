@@ -1,10 +1,10 @@
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'bar',
+var ctx = document.getElementById('graph');
+var graph = new Chart(ctx, {
+    type: 'line',
     data: {
         labels: ['blue', 'green', 'yellow', 'purple', 'pink', 'orange'],
         datasets: [{
-            label: '# of Votes',
+            label: '${`BitCoin`}',
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
                 'blue',
