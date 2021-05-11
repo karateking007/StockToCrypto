@@ -20,8 +20,26 @@
 }
 
 .sub-heading {
+  margin-top: 10px;
   text-align: center;
   font-size: 1.5rem;
+}
+
+/* Selection Section */
+.selection-div {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.crypto-div {
+  margin: 0 15px;
+}
+
+.stock-div {
+  margin: 0 15px;
 }
 
 /* Graph Section */
