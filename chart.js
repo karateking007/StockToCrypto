@@ -14,7 +14,7 @@ const data = {
             label: '${S&P 500}',
             data: [50, 10, 15, 25, 10, 50, 70],
             borderColor: 'rgb(0, 0, 255)',
-            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 255, 0.5)',
             yAxisID: 'y1',
         }
     ]
@@ -32,8 +32,7 @@ const config = {
         stacked: false,
         plugins: {
             title: {
-                display: true,
-                text: 'Chart.js Line Chart - Multi Axis'
+                display: false,
             }
         },
         scales: {
