@@ -1,9 +1,8 @@
 function fetchData() {
-    const API_KEY = '3WYAZ3VMWSWBZ3GC';
+    const API_KEY = '8b1960cf9c5847b490b9de4499de24c0';
     let stockSymbol = 'GSPC';
-    let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${stockSymbol}&apikey=${API_KEY}`;
+    let API_Call = `https://api.twelvedata.com/time_series?symbol=${stockSymbol}&exchange=NYSE&interval=1month&outputsize=12&apikey=${API_KEY}`;
     let monthSeries = [];
-    let counter = 0;
 
     fetch(API_Call)
         .then(
@@ -13,17 +12,15 @@ function fetchData() {
         )
         .then(function (data) {
             console.log(data);
-            for (let key in data['Monthly Time Series']) {
-                monthSeries.push(data['Monthly Time Series'][key][open]);
-                counter += 1;
-                if (counter >= 12) {
-                    break;
-                }
+            for (let key in data['values']) {
+                monthSeries.push(data['values'][key]);
             }
-            console.log(monthSeries);
+
+            const seriesDates = monthSeries.map(dates => dates.datetime);
+
+
+            console.log(seriesDates);
         })
-
-
 }
 
 fetchData();
