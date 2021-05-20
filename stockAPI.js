@@ -8,6 +8,7 @@ function fetchData() {
     var workingMonth = "";
     var workingMonthSplitArr = [];
     var dateNums;
+    var argsObj = {};
 
     fetch(API_Call)
         .then(
@@ -38,10 +39,15 @@ function fetchData() {
             console.log(workingMonthArr);
             console.log(closingPrice);
 
-            return workingMonthArr;
+            argsObj = {
+                graphTimeline: workingMonthArr,
+                graphPrice: closingPrice
+            }
+
+            return argsObj;
         })
-        .then(function (timeline) {
-            graphData(timeline);
+        .then(function (argsObj) {
+            graphData(argsObj);
         }
 
         );

@@ -1,13 +1,14 @@
-function graphData(graphTimeline) {
+function graphData(argsObj) {
 
-    const labels = graphTimeline;
+    // const labels = ["jan", "jan", "jan", "jan", "jan", "jan", "jan", "jan", "jan", "jan", "jan", "jan",];
+    const labels = argsObj.graphTimeline;
 
     const data = {
         labels: labels,
         datasets: [
             {
                 label: '${BitCoin}',
-                data: [20, 50, 10, 20, 70, 50, 90, 20, 50, 10, 20, 70],
+                data: argsObj.graphPrice,
                 borderColor: 'rgb(255, 0, 0)',
                 backgroundColor: 'rgba(255, 0, 0, 0.5)',
                 yAxisID: 'y',
