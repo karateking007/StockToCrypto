@@ -2,7 +2,7 @@ function graphData(argsObj) {
 
     Chart.defaults.font.size = 16;
     const labels = argsObj.cryptoGraphTimeline;
-    const labelObj = { "BTC/USD": "Bitcoin", "ETH/USD": "Ethereum", "XRP/USD": "Ripple", "GSPC": "S&P 500", "DJI": "Dow Jones", "NDAQ": "NASDAQ", }
+    const labelObj = { "BTC/USD": "Bitcoin", "ETH/USD": "Ethereum", "XRP/USD": "Ripple", "GSPC": "S&P 500", "DJI": "Dow Jones", "IXIC": "NASDAQ", }
 
     const data = {
         labels: labels,

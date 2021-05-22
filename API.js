@@ -5,7 +5,7 @@ function fetchData() {
     let crypto_API_Call = `https://api.twelvedata.com/time_series?symbol=${cryptoSymbol}&exchange=Binance&interval=1month&outputsize=12&apikey=${API_KEY}`;
 
     let stockSymbol = changeStockValue;
-    let stock_API_Call = `https://api.twelvedata.com/time_series?symbol=${stockSymbol}&exchange=NYSE&interval=1month&outputsize=12&apikey=${API_KEY}`;
+    let stock_API_Call = `https://api.twelvedata.com/time_series?symbol=${stockSymbol}&interval=1month&outputsize=12&apikey=${API_KEY}`;
 
     let stockResObj = [];
     let cryptoResObj = [];
@@ -60,9 +60,12 @@ function fetchData() {
             for (let key in cryptoData['values']) {
                 cryptoResObj.push(cryptoData['values'][key]);
             }
+            console.log(cryptoResObj);
 
             const seriesDates = cryptoResObj.map(dates => dates.datetime);
             var cryptoClosingPrice = cryptoResObj.map(cryptoClosePrice => cryptoClosePrice.close);
+
+
 
             for (let i = 0; i < seriesDates.length; i++) {
                 cryptoWorkingMonthSplitArr = seriesDates[i].split("");
@@ -76,20 +79,13 @@ function fetchData() {
             argsObj.cryptoGraphTimeline = cryptoWorkingMonthArr;
             argsObj.cryptoGraphPrice = cryptoClosingPrice;
 
+
             return argsObj;
         })
         .then(function (argsObj) {
             graphData(argsObj);
         }
         )
-        .catch((err) => {
-            console.error(err);
-        }
-        )
 }
 
-
-
-
 fetchData();
-
