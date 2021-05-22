@@ -1,5 +1,6 @@
 function graphData(argsObj) {
 
+    Chart.defaults.font.size = 16;
     const labels = argsObj.cryptoGraphTimeline;
     const labelObj = { "BTC/USD": "Bitcoin", "ETH/USD": "Ethereum", "XRP/USD": "Ripple", "GSPC": "S&P 500", "DJI": "Dow Jones", "NDAQ": "NASDAQ", }
 
@@ -44,14 +45,16 @@ function graphData(argsObj) {
                     display: true,
                     position: 'left',
                     ticks: {
-                        // Include a dollar sign in the ticks
+                        color: 'red',
+                        beginAtZero: true,
+                        // Include a dollar sign & commas
                         callback: function (value) {
-                            return '$' + value;
+                            return '$' + value.toLocaleString();
                         }
                     },
                     title: {
                         display: true,
-                        text: labelObj[changeCryptoValue] + ' Price (USD)',
+                        text: labelObj[changeCryptoValue] + ' (USD)',
                         color: 'red',
                         font: {
                             size: 16
@@ -62,6 +65,9 @@ function graphData(argsObj) {
                     type: 'linear',
                     display: true,
                     position: 'right',
+                    ticks: {
+                        color: 'blue',
+                    },
                     // grid line settings
                     grid: {
                         drawOnChartArea: false, // only want the grid lines for one axis to show up
