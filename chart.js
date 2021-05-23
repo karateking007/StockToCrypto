@@ -14,8 +14,9 @@ function graphData(argsObj) {
                 borderColor: 'rgb(255, 0, 0)',
                 backgroundColor: 'rgba(255, 0, 0, 0.5)',
                 yAxisID: 'y',
-                lineTension: 0,
-                pointRadius: 0
+                lineTension: 0.4,
+                pointRadius: 0,
+                borderWidth: 1
             },
             {
                 label: labelObj[changeStockValue],
@@ -23,8 +24,9 @@ function graphData(argsObj) {
                 borderColor: 'rgb(0, 0, 255)',
                 backgroundColor: 'rgba(0, 0, 255, 0.5)',
                 yAxisID: 'y1',
-                lineTension: 0,
-                pointRadius: 0
+                lineTension: 0.4,
+                pointRadius: 0,
+                borderWidth: 1
             }
         ]
     };

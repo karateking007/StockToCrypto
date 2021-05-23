@@ -13,8 +13,8 @@ var checkIntervalDropdown = intervalElement.options[intervalElement.selectedInde
 // Default values
 changeStockValue = checkStockDropdown;
 changeCryptoValue = checkCryptoDropdown;
-var timeInterval = '1h';
-var outputSize = 24;
+var timeInterval = '1month';
+var outputSize = 12;
 
 // Listen for stock dropdown
 stockElement.addEventListener("change", (e) => {
@@ -34,21 +34,17 @@ cryptoElement.addEventListener("change", (e) => {
 intervalElement.addEventListener("change", (e) => {
     clearChart();
     switch (e.target.value) {
-        case 'day':
-            timeInterval = '1h';
+        case 'one':
+            timeInterval = '1month';
+            outputSize = 12;
+            break;
+        case 'two':
+            timeInterval = '1month';
             outputSize = 24;
             break;
-        case 'week':
-            timeInterval = '1day';
-            outputSize = 7;
-            break;
-        case 'month':
-            timeInterval = '1day';
-            outputSize = 31;
-            break;
-        case 'year':
-            timeInterval = '1day';
-            outputSize = 366;
+        case 'three':
+            timeInterval = '1month';
+            outputSize = 36;
             break;
     }
     fetchData();

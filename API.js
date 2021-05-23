@@ -16,13 +16,19 @@ function fetchData() {
 
     var stockWorkingMonthArr = [];
     var cryptoWorkingMonthArr = [];
+    var cryptoWorkingYearArr = [];
+    var combinedMonthYear = [];
 
     var stockWorkingMonthSplitArr = [];
     var cryptoWorkingMonthSplitArr = [];
     var stockDateNums;
     var cryptoDateNums;
+    var cryptoDateYear;
 
     var argsObj = {};
+
+    var stockDates;
+    var cryptoDates;
 
     fetch(stock_API_Call)
         .then(
@@ -35,14 +41,15 @@ function fetchData() {
                 stockResObj.push(stockData['values'][key]);
             }
 
-            console.log(stockResObj);
-
-            const seriesDates = stockResObj.map(dates => dates.datetime);
+            stockDates = stockResObj.map(dates => dates.datetime);
             var stockClosingPrice = stockResObj.map(stockClosePrice => stockClosePrice.close);
 
-            for (let i = 0; i < seriesDates.length; i++) {
-                stockWorkingMonthSplitArr = seriesDates[i].split("");
+            console.log(stockDates);
+
+            for (let i = 0; i < stockDates.length; i++) {
+                stockWorkingMonthSplitArr = stockDates[i].split("");
                 stockDateNums = stockWorkingMonthSplitArr[5].concat(stockWorkingMonthSplitArr[6]);
+                console.log(stockDateNums);
                 stockWorkingMonthArr.push(datesObject[stockDateNums]);
             }
 
@@ -66,19 +73,31 @@ function fetchData() {
                 cryptoResObj.push(cryptoData['values'][key]);
             }
 
-            const seriesDates = cryptoResObj.map(dates => dates.datetime);
+            cryptoDates = cryptoResObj.map(dates => dates.datetime);
+
             var cryptoClosingPrice = cryptoResObj.map(cryptoClosePrice => cryptoClosePrice.close);
 
-            for (let i = 0; i < seriesDates.length; i++) {
-                cryptoWorkingMonthSplitArr = seriesDates[i].split("");
+            for (let i = 0; i < cryptoDates.length; i++) {
+                cryptoWorkingMonthSplitArr = cryptoDates[i].split("");
                 cryptoDateNums = cryptoWorkingMonthSplitArr[5].concat(cryptoWorkingMonthSplitArr[6]);
+                cryptoDateYear = cryptoWorkingMonthSplitArr[2].concat(cryptoWorkingMonthSplitArr[3]);
+                cryptoWorkingYearArr.push(cryptoDateYear);
                 cryptoWorkingMonthArr.push(datesObject[cryptoDateNums]);
             }
 
+            cryptoWorkingYearArr = cryptoWorkingYearArr.reverse();
             cryptoWorkingMonthArr = cryptoWorkingMonthArr.reverse();
             cryptoClosingPrice = cryptoClosingPrice.reverse();
 
-            argsObj.cryptoGraphTimeline = cryptoWorkingMonthArr;
+            console.log(cryptoWorkingMonthArr);
+
+            for (let i = 0; i < cryptoWorkingMonthArr.length; i++) {
+                combinedMonthYear.push(cryptoWorkingMonthArr[i].concat(" \'").concat(cryptoWorkingYearArr[i]));
+            }
+
+            console.log(combinedMonthYear);
+
+            argsObj.cryptoGraphTimeline = combinedMonthYear;
             argsObj.cryptoGraphPrice = cryptoClosingPrice;
 
             return argsObj;
