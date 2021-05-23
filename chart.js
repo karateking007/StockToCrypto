@@ -2,6 +2,7 @@ function graphData(argsObj) {
 
     Chart.defaults.font.size = 16;
     const labels = argsObj.cryptoGraphTimeline;
+    // const labels = ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"];
     const labelObj = { "BTC/USD": "Bitcoin", "ETH/USD": "Ethereum", "USDT/USD": "Tether", "ADA/USD": "Cardano", "BNB/USD": "Binance Coin", "DOGE/USD": "Dogecoin", "XRP/USD": "XRP", "GSPC": "S&P 500", "DJI": "Dow Jones", "IXIC": "NASDAQ" }
 
     const data = {
@@ -13,6 +14,8 @@ function graphData(argsObj) {
                 borderColor: 'rgb(255, 0, 0)',
                 backgroundColor: 'rgba(255, 0, 0, 0.5)',
                 yAxisID: 'y',
+                lineTension: 0,
+                pointRadius: 0
             },
             {
                 label: labelObj[changeStockValue],
@@ -20,6 +23,8 @@ function graphData(argsObj) {
                 borderColor: 'rgb(0, 0, 255)',
                 backgroundColor: 'rgba(0, 0, 255, 0.5)',
                 yAxisID: 'y1',
+                lineTension: 0,
+                pointRadius: 0
             }
         ]
     };

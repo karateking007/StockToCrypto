@@ -9,13 +9,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.js"
         integrity="sha512-opXrgVcTHsEVdBUZqTPlW9S8+99hNbaHmXtAdXXc61OUU6gOII5ku/PzZFqexHXc3hnK8IrJKHo+T7O4GRIJcw=="
         crossorigin="anonymous"></script>
-    <title>Stock Vs. Coin</title>
+    <title>Crypto Vs. Stock Market</title>
 </head>
 
 <body>
     <section id="title-section">
         <div class="container">
-            <h1 class="main-heading">Stock Vs. Coin</h1>
+            <h1 class="main-heading">Crypto Vs. Stock Market</h1>
             <p class="sub-heading">Compare Stock Market to Crypto Valuations</p>
         </div>
     </section>
@@ -24,8 +24,8 @@
         <div class="container">
             <div class="selection-div">
                 <div class="crypto-div">
-                    <select name="cars" id="crypto-dropdown">
-                        <option value="BTC/USD">BitCoin</option>
+                    <select name="crypto" id="crypto-dropdown">
+                        <option value="BTC/USD">Bitcoin</option>
                         <option value="ETH/USD">Ethereum</option>
                         <option value="USDT/USD">Tether</option>
                         <option value="ADA/USD">Cardano</option>
@@ -38,12 +38,20 @@
                 <p>VS</p>
 
                 <div class="stock-div">
-                    <select name="cars" id="stock-dropdown">
+                    <select name="stocks" id="stock-dropdown">
                         <option value="GSPC">S&P 500</option>
                         <option value="DJI">Dow Jones</option>
                         <option value="IXIC">NASDAQ</option>
                     </select>
                 </div>
+            </div>
+            <div class="interval-div">
+                <select name="interval" id="interval-dropdown">
+                    <option value="day">24 Hours</option>
+                    <option value="week">1 Week</option>
+                    <option value="month">1 Month</option>
+                    <option value="year">1 Year</option>
+                </select>
             </div>
         </div>
     </section>

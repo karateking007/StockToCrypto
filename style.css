@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+body {
+  background-color: #e9e9e9;
+}
+
 .container {
   max-width: 800px;
   margin: auto;
@@ -42,10 +46,40 @@
   margin: 0 15px;
 }
 
+.interval-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 100px;
+  border: none;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 10px;
+  background-color: lightgray;
+  border-radius: 3px;
+  border: 2px solid transparent;
+}
+
+.button:hover { 
+  border: 2px black solid;
+}
+
+.selected {
+  color: white;
+  background-color: black;
+}
+
 /* Graph Section */
 
 #graph-section {
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 #myChart {
