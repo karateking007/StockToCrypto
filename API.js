@@ -1,9 +1,6 @@
+import API_KEY from "./apikey";
+
 function fetchData() {
-    const API_KEY = '8b1960cf9c5847b490b9de4499de24c0';
-
-    console.log(timeInterval);
-    console.log(outputSize);
-
     let cryptoSymbol = changeCryptoValue;
     let crypto_API_Call = `https://api.twelvedata.com/time_series?symbol=${cryptoSymbol}&exchange=Binance&interval=${timeInterval}&outputsize=${outputSize}&apikey=${API_KEY}`;
 
