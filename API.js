@@ -14,21 +14,14 @@ function fetchData() {
     let cryptoResObj = [];
     const datesObject = { "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun", "07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov", "12": "Dec" };
 
-    var stockWorkingMonthArr = [];
-    var cryptoWorkingMonthArr = [];
-    var cryptoWorkingYearArr = [];
-    var combinedMonthYear = [];
+    let stockWorkingMonthArr = [], cryptoWorkingMonthArr = [], cryptoWorkingYearArr = [], combinedMonthYear = [];
 
-    var stockWorkingMonthSplitArr = [];
-    var cryptoWorkingMonthSplitArr = [];
-    var stockDateNums;
-    var cryptoDateNums;
-    var cryptoDateYear;
+    let stockWorkingMonthSplitArr = [], cryptoWorkingMonthSplitArr = [], stockDateNums, cryptoDateNums, cryptoDateYear;
 
-    var argsObj = {};
+    let argsObj = {};
 
-    var stockDates;
-    var cryptoDates;
+    let stockDates;
+    let cryptoDates;
 
     fetch(stock_API_Call)
         .then(
