@@ -1,3 +1,5 @@
+
+<script src="apikey.js" type="module"></script>
 import API_KEY from "./apikey";
 
 function fetchData() {
