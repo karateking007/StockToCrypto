@@ -19,8 +19,9 @@ function fetchData() {
     fetch(stock_API_Call)
         .then(
             function (response) {
-                console.log(response.json())
-                return response.json();
+                let retData = response.json();
+                console.log(retData)
+                return retData;
             }
         )
         .then(function (stockData) {
