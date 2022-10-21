@@ -19,38 +19,39 @@ function fetchData() {
     fetch(stock_API_Call)
         .then(
             function (response) {
-                let stockData = response.json();
-                if (stockData['status'] == 'ok') {
-                    return stockData;
-                } else {
-                    alert('Error pulling data. Please try back later.');
-                }
+                return response.json();
             }
         )
         .then(function (stockData) {
-            for (let key in stockData['values']) {
-                stockResObj.push(stockData['values'][key]);
+            if (stockData['status'] == 'ok') {
+
+                for (let key in stockData['values']) {
+                    stockResObj.push(stockData['values'][key]);
+                }
+
+                stockDates = stockResObj.map(dates => dates.datetime);
+                var stockClosingPrice = stockResObj.map(stockClosePrice => stockClosePrice.close);
+
+                for (let i = 0; i < stockDates.length; i++) {
+                    stockWorkingMonthSplitArr = stockDates[i].split("");
+                    stockDateNums = stockWorkingMonthSplitArr[5].concat(stockWorkingMonthSplitArr[6]);
+                    stockWorkingMonthArr.push(datesObject[stockDateNums]);
+                }
+
+                stockWorkingMonthArr = stockWorkingMonthArr.reverse();
+                stockClosingPrice = stockClosingPrice.reverse();
+
+                argsObj = {
+                    stockGraphTimeline: stockWorkingMonthArr,
+                    stockGraphPrice: stockClosingPrice
+                }
+
+                return fetch(crypto_API_Call)
+            } else {
+                alert("error")
             }
-
-            stockDates = stockResObj.map(dates => dates.datetime);
-            var stockClosingPrice = stockResObj.map(stockClosePrice => stockClosePrice.close);
-
-            for (let i = 0; i < stockDates.length; i++) {
-                stockWorkingMonthSplitArr = stockDates[i].split("");
-                stockDateNums = stockWorkingMonthSplitArr[5].concat(stockWorkingMonthSplitArr[6]);
-                stockWorkingMonthArr.push(datesObject[stockDateNums]);
-            }
-
-            stockWorkingMonthArr = stockWorkingMonthArr.reverse();
-            stockClosingPrice = stockClosingPrice.reverse();
-
-            argsObj = {
-                stockGraphTimeline: stockWorkingMonthArr,
-                stockGraphPrice: stockClosingPrice
-            }
-
-            return fetch(crypto_API_Call)
         })
+
         .then(
             function (response) {
                 return response.json();
