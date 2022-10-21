@@ -19,9 +19,9 @@ function fetchData() {
     fetch(stock_API_Call)
         .then(
             function (response) {
-                let stockJson = response.json();
-                if (stockJson['status'] == 'ok') {
-                    return stockJson;
+                let stockData = response.json();
+                if (stockData['status'] == 'ok') {
+                    return stockData;
                 } else {
                     alert('Error pulling data. Please try back later.');
                 }
