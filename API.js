@@ -1,20 +1,15 @@
-import API_KEY from "./apikey.js";
+// import API_KEY from "./apikey.js";
 
 function fetchData() {
-    let cryptoSymbol = changeCryptoValue;
-    let crypto_API_Call = `https://api.twelvedata.com/time_series?symbol=${cryptoSymbol}&exchange=Binance&interval=${timeInterval}&outputsize=${outputSize}&apikey=${API_KEY}`;
-
-    let stockSymbol = changeStockValue;
-    let stock_API_Call = `https://api.twelvedata.com/time_series?symbol=${stockSymbol}&interval=${timeInterval}&outputsize=${outputSize}&apikey=${API_KEY}`;
-
-    let stockResObj = [], cryptoResObj = [];
+    var cryptoSymbol = changeCryptoValue;
+    var crypto_API_Call = `https://api.twelvedata.com/time_series?symbol=${cryptoSymbol}&exchange=Binance&interval=${timeInterval}&outputsize=${outputSize}&apikey=8b1960cf9c5847b490b9de4499de24c0`;
+    var stockSymbol = changeStockValue;
+    var stock_API_Call = `https://api.twelvedata.com/time_series?symbol=${stockSymbol}&interval=${timeInterval}&outputsize=${outputSize}&apikey=8b1960cf9c5847b490b9de4499de24c0`;
+    var stockResObj = [], cryptoResObj = [];
     const datesObject = { "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun", "07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov", "12": "Dec" };
-
-    let stockWorkingMonthArr = [], cryptoWorkingMonthArr = [], cryptoWorkingYearArr = [], combinedMonthYear = [];
-
-    let stockWorkingMonthSplitArr = [], cryptoWorkingMonthSplitArr = [], stockDateNums, cryptoDateNums, cryptoDateYear;
-
-    let argsObj = {}, stockDates, cryptoDates;
+    var stockWorkingMonthArr = [], cryptoWorkingMonthArr = [], cryptoWorkingYearArr = [], combinedMonthYear = [];
+    var stockWorkingMonthSplitArr = [], cryptoWorkingMonthSplitArr = [], stockDateNums, cryptoDateNums, cryptoDateYear;
+    var argsObj = {}, stockDates, cryptoDates;
 
     fetch(stock_API_Call)
         .then(
@@ -48,7 +43,7 @@ function fetchData() {
 
                 return fetch(crypto_API_Call)
             } else {
-                alert("error")
+                alert("Error: too many requests. Please refresh / try again later.")
             }
         })
 
@@ -58,34 +53,38 @@ function fetchData() {
             }
         )
         .then(function (cryptoData) {
-            for (let key in cryptoData['values']) {
-                cryptoResObj.push(cryptoData['values'][key]);
+            if (cryptoData['status'] == 'ok') {
+                for (let key in cryptoData['values']) {
+                    cryptoResObj.push(cryptoData['values'][key]);
+                }
+
+                cryptoDates = cryptoResObj.map(dates => dates.datetime);
+
+                var cryptoClosingPrice = cryptoResObj.map(cryptoClosePrice => cryptoClosePrice.close);
+
+                for (let i = 0; i < cryptoDates.length; i++) {
+                    cryptoWorkingMonthSplitArr = cryptoDates[i].split("");
+                    cryptoDateNums = cryptoWorkingMonthSplitArr[5].concat(cryptoWorkingMonthSplitArr[6]);
+                    cryptoDateYear = cryptoWorkingMonthSplitArr[2].concat(cryptoWorkingMonthSplitArr[3]);
+                    cryptoWorkingYearArr.push(cryptoDateYear);
+                    cryptoWorkingMonthArr.push(datesObject[cryptoDateNums]);
+                }
+
+                cryptoWorkingYearArr = cryptoWorkingYearArr.reverse();
+                cryptoWorkingMonthArr = cryptoWorkingMonthArr.reverse();
+                cryptoClosingPrice = cryptoClosingPrice.reverse();
+
+                for (let i = 0; i < cryptoWorkingMonthArr.length; i++) {
+                    combinedMonthYear.push(cryptoWorkingMonthArr[i].concat(" \'").concat(cryptoWorkingYearArr[i]));
+                }
+
+                argsObj.cryptoGraphTimeline = combinedMonthYear;
+                argsObj.cryptoGraphPrice = cryptoClosingPrice;
+
+                return argsObj;
+            } else {
+                alert("Error: too many requests. Please refresh / try again later.")
             }
-
-            cryptoDates = cryptoResObj.map(dates => dates.datetime);
-
-            var cryptoClosingPrice = cryptoResObj.map(cryptoClosePrice => cryptoClosePrice.close);
-
-            for (let i = 0; i < cryptoDates.length; i++) {
-                cryptoWorkingMonthSplitArr = cryptoDates[i].split("");
-                cryptoDateNums = cryptoWorkingMonthSplitArr[5].concat(cryptoWorkingMonthSplitArr[6]);
-                cryptoDateYear = cryptoWorkingMonthSplitArr[2].concat(cryptoWorkingMonthSplitArr[3]);
-                cryptoWorkingYearArr.push(cryptoDateYear);
-                cryptoWorkingMonthArr.push(datesObject[cryptoDateNums]);
-            }
-
-            cryptoWorkingYearArr = cryptoWorkingYearArr.reverse();
-            cryptoWorkingMonthArr = cryptoWorkingMonthArr.reverse();
-            cryptoClosingPrice = cryptoClosingPrice.reverse();
-
-            for (let i = 0; i < cryptoWorkingMonthArr.length; i++) {
-                combinedMonthYear.push(cryptoWorkingMonthArr[i].concat(" \'").concat(cryptoWorkingYearArr[i]));
-            }
-
-            argsObj.cryptoGraphTimeline = combinedMonthYear;
-            argsObj.cryptoGraphPrice = cryptoClosingPrice;
-
-            return argsObj;
         })
         .then(function (argsObj) {
             graphData(argsObj);
@@ -94,3 +93,4 @@ function fetchData() {
 }
 
 fetchData();
+// export default fetchData();

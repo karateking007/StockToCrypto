@@ -1,19 +1,19 @@
 // Stock Selection
-let stockElement = document.getElementById("stock-dropdown");
-let checkStockDropdown = stockElement.options[stockElement.selectedIndex].value;
+var stockElement = document.getElementById("stock-dropdown");
+var checkStockDropdown = stockElement.options[stockElement.selectedIndex].value;
 
 // Crypto Selection
-let cryptoElement = document.getElementById("crypto-dropdown");
-let checkCryptoDropdown = cryptoElement.options[cryptoElement.selectedIndex].value;
+var cryptoElement = document.getElementById("crypto-dropdown");
+var checkCryptoDropdown = cryptoElement.options[cryptoElement.selectedIndex].value;
 
 // Interval Selection
-let intervalElement = document.getElementById("interval-dropdown");
-let checkIntervalDropdown = intervalElement.options[intervalElement.selectedIndex].value;
+var intervalElement = document.getElementById("interval-dropdown");
+var checkIntervalDropdown = intervalElement.options[intervalElement.selectedIndex].value;
 
 // Default values
 changeStockValue = checkStockDropdown;
 changeCryptoValue = checkCryptoDropdown;
-let timeInterval = '1month', outputSize = 12;
+var timeInterval = '1month', outputSize = 12;
 
 // Listen for stock dropdown
 stockElement.addEventListener("change", (e) => {
