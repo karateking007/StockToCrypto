@@ -19,7 +19,7 @@ function fetchData() {
     fetch(stock_API_Call)
         .then(
             function (response) {
-                console.log(reponse.json())
+                console.log(response.json())
                 return response.json();
             }
         )
