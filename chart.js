@@ -3,7 +3,7 @@ function graphData(argsObj) {
     Chart.defaults.font.size = 16;
     const labels = argsObj.cryptoGraphTimeline;
     // const labels = ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"];
-    const labelObj = { "BTC/USD": "Bitcoin", "ETH/USD": "Ethereum", "USDT/USD": "Tether", "ADA/USD": "Cardano", "BNB/USD": "Binance Coin", "DOGE/USD": "Dogecoin", "XRP/USD": "XRP", "GSPC": "S&P 500", "DJI": "Dow Jones", "IXIC": "NASDAQ" }
+    const labelObj = { "BTC/USD": "Bitcoin", "ETH/USD": "Ethereum", "USDT/USD": "Tether", "ADA/USD": "Cardano", "BNB/USD": "Binance Coin", "DOGE/USD": "Dogecoin", "XRP/USD": "XRP", "VOO": "VOO S&P 500 ETF", "DJI": "Dow Jones", "IXIC": "NASDAQ" }
 
     const data = {
         labels: labels,
@@ -100,5 +100,9 @@ function graphData(argsObj) {
 }
 
 function clearChart() {
-    myChart.destroy();
+    if (myChart && typeof myChart.destroy === 'function') {
+        myChart.destroy();
+    } else {
+        console.warn("myChart is not a Chart instance or has already been destroyed.");
+    }
 }
