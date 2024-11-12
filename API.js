@@ -12,14 +12,14 @@ function fetchData() {
     var argsObj = {}, stockDates, cryptoDates;
 
     fetch(stock_API_Call)
-        .then(
-            function (response) {
-                return response.json();
+        .then(function (response) {
+            if (!response.ok) { // Check if the response was successful
+                throw new Error("Error: too many requests or API issue. Please refresh / try again later.");
             }
-        )
+            return response.json();
+        })
         .then(function (stockData) {
-            if (stockData['status'] == 'ok') {
-
+            if (stockData.values) { // Check if data contains 'values'
                 for (let key in stockData['values']) {
                     stockResObj.push(stockData['values'][key]);
                 }
@@ -39,21 +39,21 @@ function fetchData() {
                 argsObj = {
                     stockGraphTimeline: stockWorkingMonthArr,
                     stockGraphPrice: stockClosingPrice
-                }
+                };
 
-                return fetch(crypto_API_Call)
+                return fetch(crypto_API_Call);
             } else {
-                alert("Error: too many requests. Please refresh / try again later.")
+                throw new Error("Data format issue: 'values' not found.");
             }
         })
-
-        .then(
-            function (response) {
-                return response.json();
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Error: too many requests or API issue. Please refresh / try again later.");
             }
-        )
+            return response.json();
+        })
         .then(function (cryptoData) {
-            if (cryptoData['status'] == 'ok') {
+            if (cryptoData.values) { // Check if data contains 'values'
                 for (let key in cryptoData['values']) {
                     cryptoResObj.push(cryptoData['values'][key]);
                 }
@@ -83,13 +83,15 @@ function fetchData() {
 
                 return argsObj;
             } else {
-                alert("Error: too many requests. Please refresh / try again later.")
+                throw new Error("Data format issue: 'values' not found.");
             }
         })
         .then(function (argsObj) {
             graphData(argsObj);
-        }
-        )
+        })
+        .catch(function (error) {
+            alert(error.message);
+        });
 }
 
 fetchData();
